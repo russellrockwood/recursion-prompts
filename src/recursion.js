@@ -6,27 +6,98 @@
 // denoted by n!, is the product of all positive integers less than or equal to n.
 // Example: 5! = 5 x 4 x 3 x 2 x 1 = 120
 // factorial(5); // 120
+
+// input an integer
+// output factorial (num * num - 1)
+
 var factorial = function(n) {
+  // base case = 1
+// function to handle base case
+  if (n < 0) {
+    return null;
+  }
+
+  if (n === 0) {
+    return 1;
+  }
+
+  return (n * factorial(n - 1));
 };
 
 // 2. Compute the sum of an array of integers.
-// sum([1,2,3,4,5,6]); // 21
-var sum = function(array) {
-};
+// sum([1,2,3,4,5,6]); // 2
+
+var sum = function (arr) {
+  // var acc = 0;
+  if (arr.length === 0) {
+    return 0;
+  }
+
+  return arr[0] + sum(arr.slice(1));
+}
+
+
 
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  var result = 0;
+
+  if (!Array.isArray(array)) {
+    return array;
+  }
+
+  array.forEach(function(item) {
+    result = result + arraySum(item);
+  })
+
+  return result;
 };
 
 // 4. Check if a number is even.
+// input integer
+// output bool
+// constraints: !use modulo, use recurse
+// edge cases: negative integers change to positive
 var isEven = function(n) {
+  n = Math.abs(n)
+  if (n === 2 || n === 0) {
+    return true;
+  }
+
+  if (n > 2) {
+    return isEven(n - 2);
+  }
+
+  return false;
 };
 
 // 5. Sum all integers below a given integer.
 // sumBelow(10); // 45
 // sumBelow(7); // 21
+
+// input: integer (positive or negative)
+// output: add all numbers below
+// base case  n <= 1 || n >= -1
+
+// while x < n
+
+// subtract 1 from n
+  // if negative add 1 to n each iteration
+  // add that to n - 2
 var sumBelow = function(n) {
+  if (n === 0) {
+    return 0;
+  }
+
+  // if (n < -1) {
+  //   return ((n + 1) * n) / -2
+  // }
+  // return ((n - 1) * n) / 2
+  if (n < 0) {
+    return n + sumBelow(n + 1) + 1
+  }
+  return n + sumBelow(n - 1) - 1
 };
 
 // 6. Get the integers within a range (x, y).
